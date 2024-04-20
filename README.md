@@ -18,6 +18,20 @@ All codes are written by Heehyeon Kim (heehyeon@kaist.ac.kr) and Jinhyeok Choi (
 ## Requirments
 We used Python 3.8, Pytorch 1.12.1, and DGL 1.0.2 with cudatoolkit 11.3.
 
+### Python environment setup with Conda
+
+```bash
+conda create -n drag python=3.8
+conda activate drag
+
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+conda install -c dglteam/label/cu121 dgl
+
+pip install pandas scikit-learn
+
+conda clean --all
+```
+
 ## Usage
 ### DRAG
 We used NVIDIA RTX A6000 and NVIDIA GeForce RTX 3090 for all our experiments. We provide the template configuration file (`template.json`) for the YelpChi and Amazon_new datasets.
