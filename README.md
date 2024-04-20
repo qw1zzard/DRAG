@@ -27,6 +27,8 @@ conda activate drag
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 conda install -c dglteam/label/cu121 dgl
 
+conda install -c conda-forge ruff
+
 pip install pandas scikit-learn
 
 conda clean --all

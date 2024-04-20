@@ -121,7 +121,7 @@ def load_df_test(exp_result_path: str, setting: str) -> pd.DataFrame:
             idx = len(df_test)
             lines = [line.strip() for line in f.readlines()][:-1]
             result = lines.pop()
-            if not 'Test performance' in result:
+            if 'Test performance' not in result:
                 continue
             exp_id = path.split('\\')[-1][:-4]
             df_test.loc[idx, 'exp_id'] = exp_id
@@ -161,7 +161,7 @@ def load_df_val(exp_result_path: str, setting: str) -> pd.DataFrame:
             idx = len(df_val)
             lines = [line.strip() for line in f.readlines()][:-1]
             result = lines.pop()
-            if not 'Validation performance' in result:
+            if 'Validation performance' not in result:
                 continue
             exp_id = path.split('\\')[-1][:-4]
             df_val.loc[idx, 'exp_id'] = exp_id
@@ -217,7 +217,7 @@ def get_best_exp_id(exp_result_path: str, dataset: str, train_ratio: str, seed: 
 
 def get_best_exp_ids(exp_result_path: str, dataset: str, train_ratio: str):
     df_val_l = get_df_val_paths(exp_result_path, dataset, train_ratio)
-    if df_val_l == None:
+    if df_val_l is None:
         return None
 
     exp_ids = []

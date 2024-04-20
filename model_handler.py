@@ -7,8 +7,8 @@ from typing import Tuple
 import torch
 import numpy as np
 
-from models import *
-from datasets import *
+from models import *  # noqa: F403
+from datasets import *  # noqa: F403
 from data_handler import DataHandlerModule
 from result_manager import ResultManager
 from utils import test, generate_batch_idx
@@ -46,7 +46,7 @@ class ModelHandlerModule:
         torch.backends.cudnn.benchmark = False
         os.environ['PYTHONHASHSEED'] = str(self.seed)
 
-    def select_model(self) -> nn.Module:
+    def select_model(self) -> nn.Module:  # noqa: F405
         """
         Select the model according to the configuration.
         If you have imported additional models, you can use it by adding the bellow codes.
@@ -58,7 +58,7 @@ class ModelHandlerModule:
         graph = self.dataset['graph']
         feature = self.dataset['features']
 
-        model = DRAG(
+        model = DRAG(  # noqa: F405
             feature.shape[1],
             self.args.emb_size,
             gat_heads=self.args.n_head,
@@ -93,10 +93,10 @@ class ModelHandlerModule:
 
         # [STEP-3-1] Define the model and loss function.
         model = self.model
-        loss_fn = nn.CrossEntropyLoss()
+        loss_fn = nn.CrossEntropyLoss()  # noqa: F405
 
         # [STEP-3-2] Define the batch sampler.
-        sampler = dgl.dataloading.MultiLayerFullNeighborSampler(len(self.args.emb_size))
+        sampler = dgl.dataloading.MultiLayerFullNeighborSampler(len(self.args.emb_size))  # noqa: F405
 
         # [STEP-3-3] Initialize the optimizer with learning rate and weight decay rate.
         optimizer = torch.optim.Adam(
@@ -109,7 +109,7 @@ class ModelHandlerModule:
         auc_best, f1_mac_best, epoch_best = 1e-10, 1e-10, 0
 
         # [STEP-4] Train the model.
-        print('\n', '*' * 20, f' Train the DRAG ', '*' * 20)
+        print('\n', '*' * 20, ' Train the DRAG ', '*' * 20)
         for epoch in range(self.epochs):
             model.train()
             avg_loss = []
@@ -120,7 +120,7 @@ class ModelHandlerModule:
             batch_idx = generate_batch_idx(
                 idx_train, y_train, self.args.batch_size, self.args.seed
             )
-            train_loader = dgl.dataloading.DataLoader(
+            train_loader = dgl.dataloading.DataLoader(  # noqa: F405
                 graph,
                 batch_idx,
                 sampler,
@@ -206,7 +206,7 @@ class ModelHandlerModule:
         model.load_state_dict(torch.load(self.result.model_path))
 
         # [STEP-9] Test the model performance.
-        print('\n', '*' * 20, f' Test the DRAG ', '*' * 20)
+        print('\n', '*' * 20, ' Test the DRAG ', '*' * 20)
         auc_test, recall_test, f1_mac_test, precision_test = test(
             model,
             self.dataset['test_loader'],

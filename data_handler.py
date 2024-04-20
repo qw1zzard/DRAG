@@ -4,8 +4,8 @@ import argparse
 from sklearn.model_selection import train_test_split
 
 from dgl import RowFeatNormalizer
-from datasets import *
-from utils import *
+from datasets import *  # noqa: F403
+from utils import *  # noqa: F403
 
 
 class DataHandlerModule:
@@ -15,8 +15,8 @@ class DataHandlerModule:
         # [STEP-1-2] Set the seed.
         np.random.seed(self.args.seed)
         random.seed(self.args.seed)
-        device = torch.device(self.args.cuda_id)
-        torch.cuda.set_device(device)
+        device = torch.device(self.args.cuda_id)  # noqa: F405
+        torch.cuda.set_device(device)  # noqa: F405
 
         # [STEP-2] Load dataset.
         print(f'Loading and preprocessing the dataset {self.args.data_name}...')
@@ -25,7 +25,7 @@ class DataHandlerModule:
 		- feat_data: The node feature matrix (np.ndarray format).
 		- labels: The labels (np.ndarray format).
 		"""
-        graph = load_data(self.args.data_name, self.args.multi_relation)
+        graph = load_data(self.args.data_name, self.args.multi_relation)  # noqa: F405
         labels = graph.ndata['y']
 
         # [STEP-3] Split the train/valid/test dataset with stratified sampling.
@@ -72,10 +72,10 @@ class DataHandlerModule:
         if self.args.data_name.startswith('amazon'):
             transform = RowFeatNormalizer(subtract_min=True, node_feat_names=['x'])
             graph = transform(graph)
-        graph.ndata['x'] = torch.FloatTensor(graph.ndata['x']).contiguous()
+        graph.ndata['x'] = torch.FloatTensor(graph.ndata['x']).contiguous()  # noqa: F405
 
-        sampler = dgl.dataloading.MultiLayerFullNeighborSampler(len(self.args.emb_size))
-        valid_loader = dgl.dataloading.DataLoader(
+        sampler = dgl.dataloading.MultiLayerFullNeighborSampler(len(self.args.emb_size))  # noqa: F405
+        valid_loader = dgl.dataloading.DataLoader(  # noqa: F405
             graph,
             idx_valid,
             sampler,
@@ -84,7 +84,7 @@ class DataHandlerModule:
             drop_last=False,
             use_uva=True,
         )
-        test_loader = dgl.dataloading.DataLoader(
+        test_loader = dgl.dataloading.DataLoader(  # noqa: F405
             graph,
             idx_test,
             sampler,
@@ -110,4 +110,4 @@ class DataHandlerModule:
             'test_loader': test_loader,
             'idx_total': list(range(len(labels))),
         }
-        print(f'Finished data loading and preprocessing!')
+        print('Finished data loading and preprocessing!')

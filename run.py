@@ -1,10 +1,11 @@
-import argparse, json
+import argparse
+import json
 
-from model_handler import *
-from data_handler import *
-from datasets import *
-from utils import *
-from models import *
+from model_handler import *  # noqa: F403
+from data_handler import *  # noqa: F403
+from datasets import *  # noqa: F403
+from utils import *  # noqa: F403
+from models import *  # noqa: F403
 
 
 def get_arguments():
@@ -20,10 +21,10 @@ def main(args) -> None:
         args = json.load(f)
 
     # [STEP-2] Initialize the Datahandler object to handle the fraud detection dataset.
-    data_handler = DataHandlerModule(args)
+    data_handler = DataHandlerModule(args)  # noqa: F405
 
     # [STEP-3] Train model and evaluate the performance.
-    model = ModelHandlerModule(args, data_handler)
+    model = ModelHandlerModule(args, data_handler)  # noqa: F405
     _, _ = model.train()
 
 
