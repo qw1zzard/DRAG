@@ -1,6 +1,6 @@
+import dgl
 import pandas as pd
 import torch
-import dgl
 from dgl.data.fraud import FraudAmazonDataset, FraudYelpDataset
 
 DATA_NAMES = ['yelp', 'amazon', 'amazon_new']

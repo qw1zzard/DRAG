@@ -1,15 +1,16 @@
 import os
+
 import numpy as np
 import pandas as pd
 import torch
-from sklearn.utils import shuffle
 from sklearn.metrics import (
-    f1_score,
     accuracy_score,
+    f1_score,
+    precision_score,
     recall_score,
     roc_auc_score,
-    precision_score,
 )
+from sklearn.utils import shuffle
 
 
 def generate_batch_idx(idx_train, y_train, batch_size, seed):

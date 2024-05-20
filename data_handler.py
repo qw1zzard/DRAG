@@ -1,9 +1,10 @@
-import random
-import numpy as np
 import argparse
+import random
+
+import numpy as np
+from dgl import RowFeatNormalizer
 from sklearn.model_selection import train_test_split
 
-from dgl import RowFeatNormalizer
 from datasets import *  # noqa: F403
 from utils import *  # noqa: F403
 

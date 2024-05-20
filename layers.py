@@ -1,13 +1,12 @@
 """DRAGConv is based on the torch module for graph attention networks v2 (GATv2)."""
 
 import torch as th
-from torch import nn
-
-from dgl import function as fn
 from dgl import DGLError
-from dgl.utils import expand_as_pair
+from dgl import function as fn
 from dgl.nn.functional import edge_softmax
 from dgl.nn.pytorch.utils import Identity
+from dgl.utils import expand_as_pair
+from torch import nn
 
 
 class DRAGConv(nn.Module):

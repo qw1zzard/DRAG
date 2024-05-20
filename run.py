@@ -1,13 +1,12 @@
 import argparse
 import json
 
-from model_handler import *  # noqa: F403
+import wandb
 from data_handler import *  # noqa: F403
 from datasets import *  # noqa: F403
-from utils import *  # noqa: F403
+from model_handler import *  # noqa: F403
 from models import *  # noqa: F403
-
-import wandb
+from utils import *  # noqa: F403
 
 
 def get_arguments():
