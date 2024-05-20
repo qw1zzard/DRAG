@@ -29,7 +29,7 @@ conda install -c dglteam/label/cu121 dgl
 
 conda install -c conda-forge ruff
 
-pip install pandas scikit-learn
+pip install pandas scikit-learn wandb
 
 conda clean --all
 ```

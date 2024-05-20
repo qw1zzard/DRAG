@@ -13,6 +13,8 @@ from data_handler import DataHandlerModule
 from result_manager import ResultManager
 from utils import test, generate_batch_idx
 
+import wandb
+
 PYG_DIR_PATH = './data/pyg'
 
 
@@ -159,6 +161,8 @@ class ModelHandlerModule:
             end_time = time.time()
             epoch_time += end_time - start_time
             line = f'Epoch: {epoch+1} (Best: {epoch_best}), loss: {np.mean(avg_loss)}, time: {epoch_time}s'
+            wandb.log({'epoch': epoch, 'epoch_best': epoch_best,
+                       'loss': np.mean(avg_loss), 'time': epoch_time})
             self.result.write_train_log(line, print_line=True)
 
             # [STEP-5] Validate the model performance for each validation epoch.
@@ -173,6 +177,9 @@ class ModelHandlerModule:
                     epoch_best,
                     flag='val',
                 )
+                
+                wandb.log({'auc': auc_val, 'recall': recall_val,
+                           'f1_mac': f1_mac_val, 'precision_val': precision_val})
 
                 # [STEP-5-2] If the current model is best, save the model and update the best value.
                 gain_auc = (auc_val - auc_best) / auc_best
